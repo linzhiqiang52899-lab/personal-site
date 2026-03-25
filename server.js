@@ -42,7 +42,7 @@ async function scanContentDir() {
     for (const file of files) {
       if (file.isFile()) {
         const ext = path.extname(file.name).toLowerCase();
-        if (ext === '.md' || ext === '.html') {
+        if (ext === '.md' || ext === '.html' || ext === '.pdf') {
           const filePath = path.join(CONTENT_DIR, file.name);
           const stats = await fs.stat(filePath);
           const title = path.basename(file.name, ext);
@@ -220,11 +220,11 @@ app.get('/', (req, res) => {
   let listHTML = '<h1>📖 内容列表</h1>';
 
   if (fileIndex.length === 0) {
-    listHTML += '<p style="color: #999; text-align: center; padding: 2rem;">暂无内容，请将 .md 或 .html 文件放入 content 目录</p>';
+    listHTML += '<p style="color: #999; text-align: center; padding: 2rem;">暂无内容，请将 .md、.html 或 .pdf 文件放入 content 目录</p>';
   } else {
     listHTML += '<div style="margin: 1rem 0;">';
     fileIndex.forEach((file, index) => {
-      const icon = file.type === 'md' ? '📝' : '🌐';
+      const icon = file.type === 'md' ? '📝' : file.type === 'pdf' ? '📄' : '🌐';
       const date = file.mtime.toLocaleDateString('zh-CN') + ' ' + file.mtime.toLocaleTimeString('zh-CN', {hour: '2-digit', minute: '2-digit'});
       listHTML += `
         <div style="
@@ -264,6 +264,13 @@ app.get('/:title', async (req, res) => {
   }
 
   try {
+    if (file.type === 'pdf') {
+      // PDF 文件直接返回，让浏览器内置 PDF 查看器显示
+      const filePath = path.join(CONTENT_DIR, file.filename);
+      res.sendFile(filePath);
+      return;
+    }
+
     const content = await getFileContent(file.filename);
     let bodyContent;
 
