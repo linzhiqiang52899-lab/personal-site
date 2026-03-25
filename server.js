@@ -201,7 +201,7 @@ function generateHTML(title, bodyContent) {
 </head>
 <body>
   <header class="header">
-    <a href="/"><h1>📚 个人内容</h1></a>
+    <a href="/"><h1>📺 强哥频道</h1></a>
   </header>
   <div class="container">
     <div class="content-card">
