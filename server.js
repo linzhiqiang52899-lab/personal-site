@@ -172,11 +172,15 @@ function generateHTML(title, bodyContent) {
       width: 100%;
       border-collapse: collapse;
       margin: 1rem 0;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
     }
     .content-card th, .content-card td {
       border: 1px solid #e1e4e8;
       padding: 0.75rem;
       text-align: left;
+      min-width: 100px;
     }
     .content-card th {
       background: #f6f8fa;
