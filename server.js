@@ -27,12 +27,17 @@ marked.setOptions({
 let fileIndex = [];
 
 // 扫描内容目录
+let isScanning = false;
 async function scanContentDir() {
+  if (isScanning) return;
+  isScanning = true;
+
   try {
     await fs.mkdir(CONTENT_DIR, { recursive: true });
     const files = await fs.readdir(CONTENT_DIR, { withFileTypes: true });
 
     fileIndex = [];
+    const seen = new Set();
 
     for (const file of files) {
       if (file.isFile()) {
@@ -41,6 +46,10 @@ async function scanContentDir() {
           const filePath = path.join(CONTENT_DIR, file.name);
           const stats = await fs.stat(filePath);
           const title = path.basename(file.name, ext);
+
+          // 去重
+          if (seen.has(file.name)) continue;
+          seen.add(file.name);
 
           fileIndex.push({
             title: title,
@@ -60,6 +69,8 @@ async function scanContentDir() {
     console.log(`[扫描完成] 找到 ${fileIndex.length} 个文件`);
   } catch (error) {
     console.error('扫描目录出错:', error);
+  } finally {
+    isScanning = false;
   }
 }
 
