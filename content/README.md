@@ -2,6 +2,11 @@
 
 这是一个简单快速的内容托管解决方案，支持移动端浏览。
 
+## 网站信息
+
+- **在线地址**: https://personal-site-umber-zeta.vercel.app/
+- **仓库地址**: https://github.com/linzhiqiang52899-lab/personal-site
+
 ## 如何使用
 
 ### 添加新内容
@@ -16,8 +21,8 @@
 
 文件名即为访问路径，例如：
 
-- 文件 `content/关于我.md` → 访问 `http://localhost:3000/关于我`
-- 文件 `content/project.html` → 访问 `http://localhost:3000/project`
+- 文件 `content/关于我.md` → 访问 `https://personal-site-umber-zeta.vercel.app/关于我`
+- 文件 `content/project.html` → 访问 `https://personal-site-umber-zeta.vercel.app/project`
 
 ## 功能特点
 
