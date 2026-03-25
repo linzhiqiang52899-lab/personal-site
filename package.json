@@ -1,0 +1,20 @@
+{
+  "name": "personal-site",
+  "version": "1.0.0",
+  "description": "个人内容托管网站，支持动态扩展 MD/HTML 页面",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["content-hosting", "markdown", "blog"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "chokidar": "^3.5.3",
+    "marked": "^12.0.0",
+    "ejs": "^3.1.9",
+    "highlight.js": "^11.9.0"
+  }
+}
